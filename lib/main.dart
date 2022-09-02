@@ -1,12 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
-
 }
-
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -63,7 +60,11 @@ class MyApp extends StatelessWidget {
       //测试ListView
       // home: ListViewDemo(),
       //测试水平ListView
-      home: HorizontalListViewDemo(),
+      // home: HorizontalListViewDemo(),
+      //测试RichText
+      // home: RichTextDemo(),
+      //测试TextFiled
+      home: TextFieldDemo(),
     );
   }
 }
@@ -162,7 +163,9 @@ class IconButtonDemo extends StatelessWidget {
           ),
           tooltip: '按下',
           disabledColor: Colors.blue,
-          onPressed: () { print('===按下'); },
+          onPressed: () {
+            print('===按下');
+          },
         ),
       ),
     );
@@ -199,15 +202,18 @@ class ListViewDemo extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: <Widget>[
           ListTile(
-            leading: Icon(Icons.alarm, size: 50.0,),
-            title: Text('条目1',
-              style: TextStyle(
-                  color: Colors.green
-              ),),
-            subtitle: Text('条目描述1',
-              style: TextStyle(
-                  color: Colors.red
-              ),),
+            leading: Icon(
+              Icons.alarm,
+              size: 50.0,
+            ),
+            title: Text(
+              '条目1',
+              style: TextStyle(color: Colors.green),
+            ),
+            subtitle: Text(
+              '条目描述1',
+              style: TextStyle(color: Colors.red),
+            ),
             tileColor: Colors.yellow,
             selectedColor: Colors.blue,
             selected: true,
@@ -216,51 +222,63 @@ class ListViewDemo extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.alarm, size: 50.0,),
-            title: Text('条目1',
-              style: TextStyle(
-                  color: Colors.green
-              ),),
-            subtitle: Text('条目描述1',
-              style: TextStyle(
-                  color: Colors.red
-              ),),
+            leading: Icon(
+              Icons.alarm,
+              size: 50.0,
+            ),
+            title: Text(
+              '条目1',
+              style: TextStyle(color: Colors.green),
+            ),
+            subtitle: Text(
+              '条目描述1',
+              style: TextStyle(color: Colors.red),
+            ),
             tileColor: Colors.yellow,
           ),
           ListTile(
-            leading: Icon(Icons.alarm, size: 50.0,),
-            title: Text('条目1',
-              style: TextStyle(
-                  color: Colors.green
-              ),),
-            subtitle: Text('条目描述1',
-              style: TextStyle(
-                  color: Colors.red
-              ),),
+            leading: Icon(
+              Icons.alarm,
+              size: 50.0,
+            ),
+            title: Text(
+              '条目1',
+              style: TextStyle(color: Colors.green),
+            ),
+            subtitle: Text(
+              '条目描述1',
+              style: TextStyle(color: Colors.red),
+            ),
             tileColor: Colors.yellow,
           ),
           ListTile(
-            leading: Icon(Icons.alarm, size: 50.0,),
-            title: Text('条目1',
-              style: TextStyle(
-                  color: Colors.green
-              ),),
-            subtitle: Text('条目描述1',
-              style: TextStyle(
-                  color: Colors.red
-              ),),
+            leading: Icon(
+              Icons.alarm,
+              size: 50.0,
+            ),
+            title: Text(
+              '条目1',
+              style: TextStyle(color: Colors.green),
+            ),
+            subtitle: Text(
+              '条目描述1',
+              style: TextStyle(color: Colors.red),
+            ),
             tileColor: Colors.yellow,
           ),
           ListTile(
-            leading: Icon(Icons.alarm, size: 50.0,),
-            title: Text('条目1',
-              style: TextStyle(
-                  color: Colors.green
-              ),),
-            subtitle: Text('条目描述1',
-              style: TextStyle(
-                  color: Colors.red
-              ),),
+            leading: Icon(
+              Icons.alarm,
+              size: 50.0,
+            ),
+            title: Text(
+              '条目1',
+              style: TextStyle(color: Colors.green),
+            ),
+            subtitle: Text(
+              '条目描述1',
+              style: TextStyle(color: Colors.red),
+            ),
             tileColor: Colors.yellow,
           ),
         ],
@@ -292,8 +310,10 @@ class HorizontalListViewDemo extends StatelessWidget {
               color: Colors.blue,
               child: Column(
                 children: <Widget>[
-                  Text('文本',
-                  textAlign: TextAlign.start,),
+                  Text(
+                    '文本',
+                    textAlign: TextAlign.start,
+                  ),
                   Icon(Icons.phone)
                 ],
               ),
@@ -311,5 +331,93 @@ class HorizontalListViewDemo extends StatelessWidget {
       ),
     );
   }
+}
 
+class RichTextDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("RichTextDemo"),
+        ),
+        body: Container(
+          height: 200.0,
+          width: 200.0,
+          alignment: Alignment.center,
+          child: RichText(
+            textAlign: TextAlign.end,
+            text: TextSpan(
+                style: DefaultTextStyle.of(context).style,
+                children: <InlineSpan>[
+                  TextSpan(
+                      text: '你好啊',
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                          decoration: TextDecoration.none)),
+                  TextSpan(
+                      text: "我很好",
+                      style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontSize: 15.0,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          print('===点击了RichText');
+                        }),
+                ]),
+          ),
+        ));
+  }
+}
+
+class TextFieldDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var _textCounter = '';
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('TextFieldDemo'),
+      ),
+      body: TextField(
+        keyboardType: TextInputType.phone,
+        decoration: InputDecoration(
+          icon: Icon(Icons.phone),
+          prefix: Icon(Icons.person),
+          suffix: Icon(Icons.search),
+          hintText: '请输入电话号码',
+          hintStyle: TextStyle(
+            color: Color(0xffc8c8c8),
+            fontSize: 12.0,
+          ),
+          labelText: '电话号码',
+          labelStyle: TextStyle(
+            color: Colors.blue,
+          ),
+          helperText: '请输入11位数字',
+          helperStyle: TextStyle(color: Colors.yellow),
+          helperMaxLines: 1,
+          errorText: '手机号输入有误',
+          errorStyle: TextStyle(color: Colors.red),
+          errorMaxLines: 1,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(100.0)),
+              borderSide: BorderSide(color: Colors.red)),
+          counterText: '${_textCounter.length}/32',
+          filled: true,
+          fillColor: Color(0xffcccccc),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+            borderRadius: BorderRadius.all(Radius.circular(100.0)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.yellowAccent),
+            borderRadius: BorderRadius.all(Radius.circular(100.0)),
+          ),
+        ),
+      ),
+    );
+  }
 }
